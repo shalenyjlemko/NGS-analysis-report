@@ -3,8 +3,10 @@
 \usepackage{graphicx}
 \usepackage[english]{babel}
 \usepackage{geometry}
+\usepackage{setspace}
 
 \geometry{margin=1in}
+\onehalfspacing
 
 \begin{document}
 
@@ -22,5 +24,46 @@
 
     \end{center}
 \end{titlepage}
+
+\newpage
+
+
+\section*{Introduction}
+
+We have carried out linkage analyses (lod-score or affected sib-pairs) 
+and association analyses (case-control or familial) for a monogenic disease, then for a multifactorial disease:
+\begin{enumerate}
+    \item Study of a monogenic disease: Clouston's disease
+    \begin{enumerate}
+        \item Genetic linkage analysis (lodscore)
+        \item Familial association analysis
+    \end{enumerate}
+    \item Study of a multifactorial disease: rheumatoid arthritis
+    \begin{enumerate}
+        \item Genetic linkage analysis (affected sib-pairs)
+        \item Genome-Wide case-control association analysis
+    \end{enumerate}
+\end{enumerate}
+
+ 
+The data and programs were provided by our professor VALÉRIE CHAUDRU.
+
+\section{Monogenic disease: Clouston's disease}
+
+Clouston syndrome is mainly characterized by abnormal nails (thickened, slow-growing, brittle) and alopecia (hair loss). \textit{Palmoplantar hyperkeratosis} (commonly known as horniness) is also sometimes observed. 
+This is a rare disease, with a prevalence ranging from 1 to 9 in 100,000. It is autosomal dominant. Penetrance of the disease is complete, but its expression is variable, even in patients from the same family.
+Our aim in this part of the analysis was to:
+
+\begin{itemize}
+    \item Perform linkage analysis using the lodscore method to locate the Clouston disease gene using genetic markers located on chromosome 13.
+    \item Interpret data from a \texttt{.vcf} file containing genetic variants identified in a case-control sample and perform association analysis for a candidate variant.
+    \item Search for the causal genetic variant using familial association analysis.
+\end{itemize}
+
+\subsection{Genetic linkage analysis - lodscore method}
+
+We have analyzed the data contained in the \texttt{fam.txt} file using \texttt{paramlink} package in R. 
+
+\section{Multifactorial disease: Rheumatoid Arthritis}
 
 \end{document}
