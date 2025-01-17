@@ -1,0 +1,30 @@
+PLINK v1.90b5 32-bit (14 Nov 2017)
+Options in effect:
+  --adjust
+  --bfile IndMkMAFHWE
+  --ci .095
+  --logistic
+  --out res_geno2
+
+Hostname: SKYNET
+Working directory: C:\Users\denis\OneDrive\Desktop\Uni\NGS\Project\TP_DATA_PROG\TP_DATA_PROG\II.a.Plink
+Start time: Thu Jan 16 15:20:59 2025
+
+Random number seed: 1737037259
+16295 MB RAM detected; reserving 2047 MB for main workspace.
+Allocated 1535 MB successfully, after larger attempt(s) failed.
+34348 variants loaded from .bim file.
+89 people (89 males, 0 females) loaded from .fam.
+89 phenotype values loaded from .fam.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 89 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.996651.
+34348 variants and 89 people pass filters and QC.
+Among remaining phenotypes, 44 are cases and 45 are controls.
+Writing logistic model association results to res_geno2.assoc.logistic ...
+done.
+--adjust: Genomic inflation est. lambda (based on median chisq) = 1.14288.
+--adjust values (34343 variants) written to res_geno2.assoc.logistic.adjusted .
+
+End time: Thu Jan 16 15:21:00 2025

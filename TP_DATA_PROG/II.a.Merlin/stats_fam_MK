@@ -1,0 +1,105 @@
+Pedigree Statistics - 0.6.10
+(c) 1999-2006 Goncalo Abecasis, 2002-2006 Jan Wigginton
+
+The following parameters are in effect:
+                 Pedigree File :         fam.ped (-pname)
+                     Data File :         fam.dat (-dname)
+                      IBD File :    pedstats.ibd (-iname)
+                Adobe PDF File :    pedstats.pdf (-aname)
+            Missing Value Code :         -99.999 (-xname)
+
+Additional Options
+    Pedigree File : --ignoreMendelianErrors [ON], --chromosomeX, --trim
+   Hardy-Weinberg : --hardyWeinberg, --showAll, --cutoff [0.05]
+        HW Sample : --checkFounders, --checkAll, --checkUnrelated
+           Output : --pairs, --rewritePedigree, --markerTables, --verbose
+         Grouping : --bySex, --byFamily
+     Age Checking : --age [], --birth []
+      Generations : --minGap [13.00], --maxGap [70.00], --sibGap [30.00]
+      PDF Options : --pdf, --familyPDF, --traitPDF, --affPDF, --markerPDF
+           Filter : --minGenos, --minPhenos, --minCovariates, --affectedFor []
+
+
+PEDIGREE STRUCTURE 
+==================
+   Individuals: 572 
+      Founders: 176 founders, 396 nonfounders
+        Gender: 345 females, 227 males
+      Families: 88
+
+  Family Sizes
+       Average: 6.50 (4 to 13)
+  Distribution: 5 (20.5%), 6 (19.3%) and 4 (18.2%)
+
+  Generations
+       Average: 2.00 (2 to 2)
+  Distribution: 2 (100.0%), 0 (0.0%) and 1 (0.0%)
+
+Checking family connectedness ... 
+   All individuals in each family are connected.
+
+
+
+AFFECTION STATISTICS
+====================
+
+                  [Diagnostics]      [Founders] Prevalence
+             PR      453  79.2%       59  33.5%      41.7%
+          Total      453  79.2%       59  33.5%
+
+Switching to summary output mode because there are more than 50 markers.
+See file pedstats.markerinfo for detailed marker information.
+
+DATA QUALITY
+============
+
+HIGHEST AND LOWEST GENOTYPING RATES BY MARKER
+
+         MARKER   RANK    PROP   N_GENO |        MARKER   RANK    PROP   N_GENO
+
+-------------------------------------------------------------------------------
+  a055zg1/(AC)n      1   74.1%      424 | a102wf9/(AC)n   1089    1.7%       10
+ 064xh7_b/(AC)n      2   74.0%      423 | a134xc1/(AC)n   1088    2.1%       12
+  a343xc9/(AC)n      3   73.6%      421 |  056yb8/(AC)n   1087    2.4%       14
+  b283zh5/(AC)n      4   73.6%      421 | a065xd9/(AC)n   1086    2.6%       15
+   207wb2/(AC)n      5   73.6%      421 |  029yc3/(AC)n   1085    2.8%       16
+ 112yd4_b/(AC)n      6   73.3%      419 | a052tb9/(AC)n   1084    2.8%       16
+  157xb12/(AC)n      7   73.3%      419 | a121ze5/(AC)n   1083    2.8%       16
+   192yd2/(AC)n      8   73.1%      418 | a337ze9/(AC)n   1082    3.0%       17
+165yh12_b/(AC)n      9   73.1%      418 | a210ze5/(AC)n   1081    3.0%       17
+   224xg5/(AC)n     10   73.1%      418 | b334zd5/(AC)n   1080    3.0%       17
+
+         Totals  1089   52.7%   328040
+
+
+HIGHEST AND LOWEST HETEROZYGOSITIES BY MARKER
+
+         MARKER   RANK     HET   N_GENO |        MARKER   RANK     HET   N_GENO
+
+-------------------------------------------------------------------------------
+  a348wh1/(AC)n      1   99.6%      252 |  112yb4/(AC)n   1089   14.7%      339
+   312xf5/(AC)n      2   96.0%       25 | 144yc11/(AC)n   1088   28.2%      255
+  b291wg5/(AC)n      3   95.4%      108 | a067we1/(AC)n   1087   28.6%      189
+217yb10_t/(AC)n      4   94.8%      362 | a176zb1/(AC)n   1086   30.7%      254
+ 207za9_b/(AC)n      5   94.0%      384 | b291ye5/(AC)n   1085   31.0%      126
+   029yc3/(AC)n      6   93.8%       16 |  301ze9/(AC)n   1084   31.3%      179
+ 312xd1_b/(AC)n      7   93.4%      363 | b319ya5/(AC)n   1083   33.2%      283
+   303td9/(AC)n      8   93.2%      221 | 203ze11/(AC)n   1082   35.4%       99
+  b316ze1/(AC)n      9   93.1%      347 |  333wd5/(AC)n   1081   35.8%      411
+  b031ye9/(AC)n     10   93.1%      331 |  274zb5/(AC)n   1080   36.0%      292
+
+         Totals  1089   74.9%   328040
+
+
+Detailed marker summaries for all 1089 markers written to file pedstats.markerinfo
+
+If you find this program useful in your work, please cite:
+
+	Wigginton, JE and Abecasis, GR (2005) PEDSTATS: descriptive
+	statistics, graphics and quality assessment for gene mapping data.
+	Bioinformatics. 21(16):3445-3447
+
+
+
+
+
