@@ -1,4 +1,4 @@
-setwd('C:/Users/denis/OneDrive/Desktop/Uni/NGS/Project/TP_DATA_PROG/TP_DATA_PROG/I.a.Paramlink')
+setwd('C:/Users/denis/OneDrive/Desktop/Uni/NGS/Project/TP_DATA_PROG/I.a.Paramlink')
 library(paramlink)
 fam = read.table('fam.txt')
 
@@ -8,7 +8,58 @@ x = linkdat(fam)
 
 summary(x)
 
+# generating family tree figure
 plot(x, marker=1)
+
+library(kinship2)
+library(igraph)
+library(ggraph)
+library(tidyverse)
+library(dplyr)
+
+
+id <- fam[ , 2]
+dadid <- fam[ , 3]
+momid <- fam[ , 4]
+sex <- fam[ , 5]
+affected <- fam[ , 6]
+
+genotypes <- fam[ , 7:32]
+
+mark1_gt <- paste(fam[ ,7], fam[, 8], sep = "/")
+
+ped <- pedigree(id = id, dadid = dadid, momid = momid, sex = sex, affected = affected)
+
+colors <- ifelse(fam$V6 == 2, "lightgreen", ifelse(fam$V6 == 1, "black", "grey"))
+
+plot(ped, symbolsize = 1.3, cex = 0.2, col = colors, 
+     packed = TRUE,
+     align = TRUE,
+     width = 30,
+     branch = 0.9,
+     #subregion = TRUE,
+     pconnect = 0,
+     packed.spacing = 2,
+     main = "Pedigree with 5 generations"
+     )
+
+text(ped$plot$x, ped$plot$y, labels = mark1_gt, cex = 0.6, col = "blue")
+# trying for no result
+
+
+
+plot(x, marker = 1, symbolsize = 1.1, col = colors, cex = 0.4, pconnect = 0, branch = 0.2, width = 50, main = "Pedigree with Genotypes")
+
+
+
+
+# Save plot as PNG with higher resolution and larger dimensions
+png("pedigree_plot.png", width = 3840, height = 2160, res = 500)  # Customize width, height, and resolution
+plot(x, marker = 1, symbolsize = 1.2, col = colors, cex = 0.5, pconnect = 0, branch = 0.2, width = 50, main = "Pedigree with Genotypes")
+
+dev.off()  # Close the device to save the file
+
+# running lod score
 
 xdom = setModel(x, model=1, penetrances = c(0.00001, 1, 1), dfreq = 0.00001)
 

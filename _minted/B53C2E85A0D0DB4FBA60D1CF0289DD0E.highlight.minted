@@ -1,0 +1,5 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{        }\PYG{n}{fam}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{read.table}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{fam.txt\PYGZsq{}}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{linkdat}\PYG{p}{(}\PYG{n}{fam}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n+nf}{summary}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+\end{MintedVerbatim}

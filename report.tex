@@ -4,6 +4,7 @@
 \usepackage[english]{babel}
 \usepackage{geometry}
 \usepackage{setspace}
+\usepackage{minted}
 
 \geometry{margin=1in}
 \onehalfspacing
@@ -50,20 +51,65 @@ The data and programs were provided by our professor VALÉRIE CHAUDRU.
 
 \section{Monogenic disease: Clouston's disease}
 
-Clouston syndrome is mainly characterized by abnormal nails (thickened, slow-growing, brittle) and alopecia (hair loss). \textit{Palmoplantar hyperkeratosis} (commonly known as horniness) is also sometimes observed. 
-This is a rare disease, with a prevalence ranging from 1 to 9 in 100,000. It is autosomal dominant. Penetrance of the disease is complete, but its expression is variable, even in patients from the same family.
+Clouston syndrome is mainly characterized by abnormal nails (thickened, slow-growing, brittle) 
+and alopecia (hair loss). \textit{Palmoplantar hyperkeratosis} (commonly known as horniness) is 
+also sometimes observed. 
+This is a rare disease, with a prevalence ranging from 1 to 9 in 100,000. It is autosomal dominant. 
+Penetrance of the disease is complete, but its expression is variable, even in patients from the same family.
 Our aim in this part of the analysis was to:
 
 \begin{itemize}
-    \item Perform linkage analysis using the lodscore method to locate the Clouston disease gene using genetic markers located on chromosome 13.
-    \item Interpret data from a \texttt{.vcf} file containing genetic variants identified in a case-control sample and perform association analysis for a candidate variant.
+    \item Perform linkage analysis using the lodscore method to locate the Clouston disease gene 
+    using genetic markers located on chromosome 13.
+    \item Interpret data from a \texttt{.vcf} file containing genetic variants identified in a 
+    case-control sample and perform association analysis for a candidate variant.
     \item Search for the causal genetic variant using familial association analysis.
 \end{itemize}
 
 \subsection{Genetic linkage analysis - lodscore method}
 
 We have analyzed the data contained in the \texttt{fam.txt} file using \texttt{paramlink} package in R. 
+First we performed some initial data exploration using \texttt{linkdat()} and \texttt{summary()} functions:
 
-\section{Multifactorial disease: Rheumatoid Arthritis}
+    
+    \begin{minted}[frame=lines, linenos]{r}
+        fam = read.table('fam.txt')
+        x = linkdat(fam)
+        summary(x)
+        \end{minted}
+
+
+\newpage
+We found that the file contains data of a large family of 47 individuals, comprising 22 affected and
+ 25 unaffected members. These individuals are organized into 10 nuclear subfamilies and 
+have been genotyped for 13 genetic markers on chromosome 13. For 11 individuals in the dataset no 
+parent data was available (further reffered to as "founders"). Figure \ref{fig:pedigree} shows 
+the pedigree plot of the family.
+
+\begin{figure}[ht!] % ht! means here at the top, despite placing rules 
+    \centering
+    \includegraphics[width=\textwidth]{images/pedigree_plot.png}
+    \caption{Pedigree plot of the family along with their affection status and genotypes with 
+    regards to marker 1.
+    Affected - light green, Unaffected - white. Sex: square/circle - M/F. Genotype: alleles of the marker 1.}
+    \label{fig:pedigree} % this allows to reference the figure with \ref{fig:pedigree}
+
+    
+\end{figure}
+
+In addition to helping summarize the data, the \texttt{linkdat()} function also transforms the original data
+and outputs a \texttt{linkdat} object that can be used to perform linkage analysis. \texttt{linkdat} object 
+is a list containing among others, the following important components:
+\begin{itemize}
+    \item \texttt{pedigree} - data.frame with 5 columns (ID, FID, MID, SEX, AFF) describing the pedigree in linkage format.
+    \item \texttt{orig.ids} - vector of original IDs of the individuals in the pedigree.
+    \item \texttt{subnucs} - list of vectors of IDs of individuals in each nuclear family.
+    \item \texttt{markerdata} - a list of \texttt{marker} objects describing information about the genetic markers.
+    \item \texttt{model} - a list of parameters for the linkage analysis.
+
+\end{itemize}
+
+\newpage
+    \section{Multifactorial disease: Rheumatoid Arthritis}
 
 \end{document}
