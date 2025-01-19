@@ -1,0 +1,5 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{xdom}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{setModel}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{model}\PYG{o}{=}\PYG{l+m}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{penetrances}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{0.00001}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{)}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{dfreq}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{0.00001}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{result\PYGZus{}dom}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{lod}\PYG{p}{(}\PYG{n}{xdom}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{theta}\PYG{o}{=}\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0.05}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0.1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0.15}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0.2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0.25}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0.3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0.4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m}{0.5}\PYG{p}{)}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{result\PYGZus{}\PYGZus{}dom\PYGZus{}df}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{as.data.frame}\PYG{p}{(}\PYG{n}{result\PYGZus{}dom}\PYG{p}{)}
+\end{MintedVerbatim}

@@ -63,32 +63,40 @@ dev.off()  # Close the device to save the file
 
 xdom = setModel(x, model=1, penetrances = c(0.00001, 1, 1), dfreq = 0.00001)
 
-result = lod(xdom, theta=c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5)) 
+result_dom = lod(xdom, theta=c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5)) 
+result__dom_df = as.data.frame(result_dom)
+write.csv(result__dom_df, "lod_results_dom.csv", row.names = TRUE)
 
-result_df = as.data.frame(result)
+result_dom2 = lod(xdom, theta=c(0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5)) 
+result__dom2_df = as.data.frame(result_dom2)
+write.csv(result__dom2_df, "lod_results_dom2.csv", row.names = TRUE)
 
-write.csv(result_df, "lod_results.csv", row.names = TRUE)
 
 zmax_minus_11 <- 6.6738 
 
-theta_range <- seq(0.06, 0.08, by = 0.001) 
+lod_max <- lod(xdom, theta = 0)
 
-for (theta in theta_range) {
-    # Compute the LOD score for the current theta
-    result <- lod(xdom, theta = theta)
-    
-    # Check if the first column matches the zmax - 1 value
-    if (result[, 1] > zmax_minus_11) {
-        print(paste("Theta at zmax - 1 is:", theta))
-        print(result)
-        break
+theta_range <- seq(0.06, 0.2, by = 0.001) 
+i_range <- seq(1, 10, by = 1)
+for (i in i_range) {
+    zmax_minus_11 <- lod_max[, i] - 1  # Calculate zmax - 1 for the marker
+    for (theta in theta_range) {
+        result_dom_ex <- lod(xdom, theta = theta)
+        
+        # Check if the LOD score drops below zmax - 1
+        if (result_dom_ex[, i] < zmax_minus_11) {
+            previous_theta <- theta - 0.001  # Backtrack to the previous theta
+            previous_result <- lod(xdom, theta = previous_theta)
+            
+            print(paste("Marker", i, "Lod-score:", previous_result[, i], "theta = ", previous_theta))
+            break # Stop searching for this marker once the condition is met
+        }
     }
 }
-
 lod(xdom, marker=c(5,7,8,12), theta='max') 
 
 xdom5=modifyMarker(xdom,marker = 5, afreq = c(0.1, 0.1, 0.1, 0.7))
-lod(xdom5, marker=5, theta=c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5))
+lod(xdom5, marker=5, theta=c(0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5))
 
 xrec=setModel(x, model=2, penetrances=c(0.00001,0.00001, 1), dfreq=0.00001)
 result_rec = lod(xrec)

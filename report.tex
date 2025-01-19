@@ -5,6 +5,7 @@
 \usepackage{geometry}
 \usepackage{setspace}
 \usepackage{minted}
+\usepackage{booktabs}
 
 \geometry{margin=1in}
 \onehalfspacing
@@ -105,9 +106,57 @@ is a list containing among others, the following important components:
     \item \texttt{orig.ids} - vector of original IDs of the individuals in the pedigree.
     \item \texttt{subnucs} - list of vectors of IDs of individuals in each nuclear family.
     \item \texttt{markerdata} - a list of \texttt{marker} objects describing information about the genetic markers.
-    \item \texttt{model} - a list of parameters for the linkage analysis.
-
+\item \texttt{model} - a list of parameters for the linkage analysis.
 \end{itemize}
+
+
+
+\subsection{Mode of inheritance: Autosomal Dominant}
+
+First, we have analyzed our data assuming an autosomal dominant mode of inheritance. Using the \texttt{setmodel()} function,
+we have set the parameters to:
+\begin{itemize}
+    \item phenocopies = $10^{-5}$
+    \item complete penetrance
+    \item disease allele frequency = $10^{-5}$
+\end{itemize}
+
+We then performed the linkage analysis using the \texttt{lod()} function for a range of $\theta$ from 0 to 0.5 with a step of 0.05. 
+We have saved the results in the \texttt{result\_dom} data frame for further analysis (see code below).
+
+\begin{minted}[frame=lines, linenos]{r}
+    xdom = setModel(x, model=1, penetrances = c(0.00001, 1, 1), dfreq = 0.00001)
+    result_dom = lod(xdom, theta=c(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5)) 
+    result__dom_df = as.data.frame(result_dom)
+\end{minted}
+
+\begin{figure}[hb!] % b for bottom 
+    \centering
+    \includegraphics[width=\textwidth]{images/xdom_lod_analysis.png}
+    \caption{LOD score analysis results for autosomal dominant mode of inheritance. Each column shows 
+    Lod-score for a given marker, for a given $\theta$ value. Top row shows maximum Lod-score for each marker. 
+    Conditional coloring: green to red - higest to lowest Lod-score.}   
+    \label{fig:xdom_lodscore} 
+    
+\end{figure}
+
+Based on the results shown in the figure \ref{fig:xdom_lodscore}, we can conclude that 
+the disease gene is at extrimely close proximity to markers 1-10, at 5 cM distance 
+from markers 11 and 12, and at 15 cM distance from marker 13. To confirm these findings, 
+we have performed the same analysis for $\theta$ values from 0 to 0.05 with a step of 0.01 (see figure \ref{fig:xdom_lodscore_granular}).
+
+\begin{figure}[t] % t for top 
+    \centering
+    \includegraphics[width=\textwidth]{images/xdom_lod_analysis_more_granular.png}
+    \caption{LOD score analysis results for autosomal dominant mode of inheritance for more 
+    granular $\theta$ values. Each column shows Lod-score for a given marker, for a given 
+    $\theta$ value. Top row shows maximum Lod-score for each marker. Conditional coloring: 
+    green to red - higest to lowest Lod-score.}   
+    \label{fig:xdom_lodscore_granular} 
+    
+\end{figure}
+
+
 
 \newpage
     \section{Multifactorial disease: Rheumatoid Arthritis}
