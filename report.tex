@@ -14,9 +14,13 @@
 
 \begin{titlepage}
     \begin{center}
-        \includegraphics[width=0.4\textwidth]{images/uni_logo.jpg} \\[1cm] % adjust the logo here
-        {\Large \textbf{Genetic Data Analysis of Rheumatoid arthritis and Clouston's disease}} \\[1cm] % Title
-        \textit{Module: M1 Méthodologie de traitement de données NGS} \\[3cm] % Subtitle
+        % adjust the logo here
+        % Title
+        {\Large \textbf{Genetic Data Analysis of Rheumatoid arthritis and Clouston's disease}} \\[1cm] 
+        
+        % Subtitle
+        \textit{Module: M1 Méthodologie de traitement de données NGS} \\[3cm]
+        
 
         \vfill % to push the authors to the bottom of the page
 
@@ -84,7 +88,7 @@ First we performed some initial data exploration using \texttt{linkdat()} and \t
 We found that the file contains data of a large family of 47 individuals, comprising 22 affected and
  25 unaffected members. These individuals are organized into 10 nuclear subfamilies and 
 have been genotyped for 13 genetic markers on chromosome 13. For 11 individuals in the dataset no 
-parent data was available (further reffered to as "founders"). Figure \ref{fig:pedigree} shows 
+parent data was available (further referred to as "founders"). Figure \ref{fig:pedigree} shows 
 the pedigree plot of the family.
 
 \begin{figure}[ht!] % ht! means here at the top, despite placing rules 
@@ -140,10 +144,28 @@ We have saved the results in the \texttt{result\_dom} data frame for further ana
     
 \end{figure}
 
-Based on the results shown in the figure \ref{fig:xdom_lodscore}, we can conclude that 
-the disease gene is at extrimely close proximity to markers 1-10, at 5 cM distance 
-from markers 11 and 12, and at 15 cM distance from marker 13. To confirm these findings, 
-we have performed the same analysis for $\theta$ values from 0 to 0.05 with a step of 0.01 (see figure \ref{fig:xdom_lodscore_granular}).
+When performing LOD-score analysis, under the null hypothesis $\mathit{H_0}$ we assume 
+that there is no linkage between the markers and the disease gene and $\mathit{\theta = 0.5}$. In other words if the two 
+loci are unlinked, the probability of observing a recombinant event $\mathit{c = 50\%}$. Under an alternative
+hypothesis $\mathit{H_1}$, if the two loci are indeed linked, we expect the probability of observing a recombinant 
+event \textit{c} to fall within $0 < c < 50\%$. LOD-score is a logarithmic likelihood ratio:
+
+\[
+\mathit{Z(x) = \log_{10} \left[ \frac{L(c = x)}{L(c = 0.5)} \right]}
+\]
+A LOD score of 3 indicates a 1,000:1 likelihood that two genes are linked and inherited together with a given 
+recombination rate(e.g. \textit{c=10\%}), compared to the likelihood under the null hypothesis.
+For all markers except M13, the maximum LOD score exceeds 3 (see Figure \ref{fig:xdom_lodscore}).
+These results suggest that the disease gene is likely in extremely close proximity to markers 1–10, 
+and approximately 5 cM away from markers 11 and 12.
+
+As for marker 13, it is highly probable that adding more families to the dataset would increase $\mathit{Z(max)}$ 
+above 3. For now, the data suggest that the disease gene might be located approximately 15 cM from marker 13.
+
+To validate these findings, we performed the same analysis using $\theta$ values ranging from 0 to 0.05 in 
+increments of 0.01 (see Figure \ref{fig:xdom_lodscore_granular}).
+
+
 
 \begin{figure}[t] % t for top 
     \centering
@@ -151,11 +173,50 @@ we have performed the same analysis for $\theta$ values from 0 to 0.05 with a st
     \caption{LOD score analysis results for autosomal dominant mode of inheritance for more 
     granular $\theta$ values. Each column shows Lod-score for a given marker, for a given 
     $\theta$ value. Top row shows maximum Lod-score for each marker. Conditional coloring: 
-    green to red - higest to lowest Lod-score.}   
+    green to red - highest to lowest Lod-score.}   
     \label{fig:xdom_lodscore_granular} 
     
 \end{figure}
 
+Next, we calculated the confidence intervals for each marker. % explanation here of why Zmax - 1 
+Visualizing the LOD score curve can be helpful for this purpose, so we plotted it for marker 1 as 
+a representative example for markers 2–10 (Figure \ref{fig:lod_curve}). 
+To determine the precise confidence intervals for the results, we ran the script located in 
+the \texttt{paramlink.R} file. Results are shown in the table below.
+
+\begin{figure}[ht] % t for top 
+    \centering
+    \includegraphics[width=\textwidth]{images/Lod-score_curve_M1.png}
+    \caption{LOD-score curve for marker 1. LOD-score values on the y-axis, $\theta$ values on the x-axis. 
+    Grey line represents the $\mathit{Z(max)-1}$ value.}  
+    \label{fig:lod_curve} 
+    
+\end{figure}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        \textbf{Marker} & \textbf{Lower} & \textbf{Upper} \\ 
+        \midrule
+        1 & 0 & 0.077 \\ 
+        2 & 0 & 0.082 \\ 
+        3 & 0 & 0.109 \\ 
+        4 & 0 & 0.074 \\ 
+        5 & 0 & 0.09 \\ 
+        6 & 0 & 0.116 \\ 
+        7 & 0 & 0.09 \\ 
+        8 & 0 & 0.097 \\ 
+        9 & 0 & 0.122 \\ 
+        10 & 0 & 0.155 \\ 
+        11 & 0.059 & 0.201 \\ 
+        12 & 0.059 & 0.201 \\ 
+        13 & NA & NA \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Confidence intervals for each marker, with lower and upper bounds. For marker 13, results are inconclusive.}
+    \label{tab:ci_bounds}
+\end{table}
 
 
 \newpage
