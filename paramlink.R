@@ -72,7 +72,7 @@ result__dom2_df = as.data.frame(result_dom2)
 write.csv(result__dom2_df, "lod_results_dom2.csv", row.names = TRUE)
 
 
-zmax_minus_11 <- 6.6738 
+
 lod_max <- lod(xdom, theta = 0)
 theta_range <- seq(0.06, 0.2, by = 0.001) 
 i_range <- seq(1, 10, by = 1)
@@ -95,32 +95,33 @@ for (i in i_range) {
     }
 }
 
-# above modified to print out CIs for each marker
-
 lod_max <- lod(xdom, theta = 0) # Get the maximum LOD scores at theta = 0
 
-theta_range <- seq(0.06, 0.2, by = 0.001)
+theta_range <- seq(0.05, 0.2, by = 0.001)
 i_range <- seq(1, 10, by = 1)
 
 # Initialize a data frame to store CI bounds
-ci_bounds <- data.frame(Marker = integer(), Lower = numeric(), Upper = numeric())
+ci_bounds <- data.frame(Marker = integer(), Lower = numeric(), Upper = numeric(), Zmax = numeric(), Zmax_Theta = numeric())
+
+# Precompute LOD scores for all theta values
+theta_lod_scores <- sapply(theta_range, function(theta) lod(xdom, theta = theta))
 
 # Loop for markers 1–10
 for (i in i_range) {
     zmax_minus_11 <- lod_max[, i] - 1  # Calculate zmax - 1 for the marker
-    if (lod_max[, i] < 3) { 
+    if (lod_max[, i] <= 3) { 
         # Inconclusive case: add NA for lower and upper bounds
-        ci_bounds <- rbind(ci_bounds, data.frame(Marker = i, Lower = NA, Upper = NA))
+        ci_bounds <- rbind(ci_bounds, data.frame(Marker = i, Lower = NA, Upper = NA, Zmax = lod_max[, i], Zmax_Theta = 0))
         next
     }
     
-    for (theta in theta_range) {
-        result_dom_ex <- lod(xdom, theta = theta)
+    for (j in seq_along(theta_range)) {
+        result_dom_ex <- theta_lod_scores[j, ]
         
-        # Check if the LOD score drops below zmax - 1
-        if (result_dom_ex[, i] < zmax_minus_11) {
-            previous_theta <- theta - 0.001  # Backtrack to the previous theta
-            ci_bounds <- rbind(ci_bounds, data.frame(Marker = i, Lower = 0, Upper = previous_theta))
+        # Check if the LOD score drops below zmax - 1 or 3
+        if (result_dom_ex[i] < zmax_minus_11 || result_dom_ex[i] < 3) {
+            previous_theta <- theta_range[j] - 0.001  # Backtrack to the previous theta
+            ci_bounds <- rbind(ci_bounds, data.frame(Marker = i, Lower = 0, Upper = previous_theta, Zmax = lod_max[, i], Zmax_Theta = 0))
             break
         }
     }
@@ -128,41 +129,48 @@ for (i in i_range) {
 
 # Additional loop for markers 11–13
 i_range_2 <- seq(11, 13, by = 1)
+theta_range <- seq(0.02, 0.2, by = 0.001)
 
 for (i in i_range_2) {
-    zmax <- max(sapply(theta_range, function(theta) lod(xdom, theta = theta)[, i]))  # Find the maximum LOD score for this marker
+    # Find the maximum LOD score and its corresponding theta
+    lod_scores <- theta_lod_scores[, i]
+    zmax <- max(lod_scores)  # Find the maximum LOD score for this marker
+    zmax_theta <- theta_range[which.max(lod_scores)]  # Find the theta at which Zmax occurs
+    
     if (zmax < 3) {
         # Inconclusive case: add NA for lower and upper bounds
-        ci_bounds <- rbind(ci_bounds, data.frame(Marker = i, Lower = NA, Upper = NA))
+        ci_bounds <- rbind(ci_bounds, data.frame(Marker = i, Lower = NA, Upper = NA, Zmax = zmax, Zmax_Theta = zmax_theta))
         next
     }
     
     # Find lower bound
     lower_theta <- NA  # Initialize lower bound
-    for (theta in theta_range) {
-        result_dom_ex <- lod(xdom, theta = theta)
-        if (result_dom_ex[, i] > zmax - 1) {
-            lower_theta <- theta - 0.001
+    for (j in seq_along(theta_range)) {
+        result_dom_ex <- theta_lod_scores[j, ]
+        if (result_dom_ex[i] > zmax - 1 || result_dom_ex[i] > 3) {
+            lower_theta <- theta_range[j] - 0.001
             break
         }
     }
     
     # Find upper bound
     upper_theta <- NA  # Initialize upper bound
-    for (theta in rev(theta_range)) { # Search in reverse for the upper bound
-        result_dom_ex <- lod(xdom, theta = theta)
-        if (result_dom_ex[, i] > zmax - 1) {
-            upper_theta <- theta + 0.001
+    for (j in rev(seq_along(theta_range))) { # Search in reverse for the upper bound
+        result_dom_ex <- theta_lod_scores[j, ]
+        if (result_dom_ex[i] > zmax - 1 || result_dom_ex[i] > 3) {
+            upper_theta <- theta_range[j] + 0.001
             break
         }
     }
     
-    # Add both bounds to ci_bounds
-    ci_bounds <- rbind(ci_bounds, data.frame(Marker = i, Lower = lower_theta, Upper = upper_theta))
+    # Add both bounds and Zmax information to ci_bounds
+    ci_bounds <- rbind(ci_bounds, data.frame(Marker = i, Lower = lower_theta, Upper = upper_theta, Zmax = zmax, Zmax_Theta = zmax_theta))
 }
 
 # Print CI bounds
 print(ci_bounds)
+
+
 
 write.csv(ci_bounds, "ci_bounds.csv", row.names = TRUE)
 

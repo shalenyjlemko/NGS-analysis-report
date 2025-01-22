@@ -3,18 +3,29 @@
 \@nameuse{bbl@beforestart}
 \babel@aux{english}{}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Monogenic disease: Clouston's disease}{1}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Genetic linkage analysis - lodscore method}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Genetic linkage analysis - LOD score method}{1}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Pedigree plot of the family along with their affection status and genotypes with regards to marker 1. Affected - light green, Unaffected - white. Sex: square/circle - M/F. Genotype: alleles of the marker 1.}}{2}{}\protected@file@percent }
 \newlabel{fig:pedigree}{{1}{2}{}{figure.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Mode of inheritance: Autosomal Dominant}{3}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces LOD score analysis results for autosomal dominant mode of inheritance. Each column shows Lod-score for a given marker, for a given $\theta $ value. Top row shows maximum Lod-score for each marker. Conditional coloring: green to red - higest to lowest Lod-score.}}{3}{}\protected@file@percent }
-\newlabel{fig:xdom_lodscore}{{2}{3}{}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces LOD score analysis results for autosomal dominant mode of inheritance for more granular $\theta $ values. Each column shows Lod-score for a given marker, for a given $\theta $ value. Top row shows maximum Lod-score for each marker. Conditional coloring: green to red - highest to lowest Lod-score.}}{4}{}\protected@file@percent }
-\newlabel{fig:xdom_lodscore_granular}{{3}{4}{}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces LOD-score curve for marker 1. LOD-score values on the y-axis, $\theta $ values on the x-axis. Grey line represents the $\mathit  {Z(max)-1}$ value.}}{5}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces LOD score analysis results for autosomal dominant mode of inheritance. Each column shows LOD score for a given marker, for a given $\theta $ value. Top row shows maximum LOD score for each marker. Conditional coloring: green to red - higest to lowest LOD score.}}{3}{}\protected@file@percent }
+\newlabel{fig:xdom_lod_score}{{2}{3}{}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces LOD score analysis results for autosomal dominant mode of inheritance for more granular $\theta $ values. Each column shows LOD score for a given marker, for a given $\theta $ value. Top row shows maximum LOD score for each marker. Conditional coloring: green to red - highest to lowest LOD score.}}{4}{}\protected@file@percent }
+\newlabel{fig:xdom_LOD_score_granular}{{3}{4}{}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Allele frequencies and LOD score}{4}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces LOD score curve for marker 1. LOD score values on the y-axis, $\theta $ values on the x-axis. Grey line represents the $\mathit  {Z_{max}-1}$ value.}}{5}{}\protected@file@percent }
 \newlabel{fig:lod_curve}{{4}{5}{}{figure.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Multifactorial disease: Rheumatoid Arthritis}{5}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Confidence intervals for each marker, with lower and upper bounds. For marker 13, results are inconclusive.}}{6}{}\protected@file@percent }
-\newlabel{tab:ci_bounds}{{1}{6}{}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Confidence intervals for each marker, including the maximum LOD score ($\mathit  {Z_{max}}$) and the corresponding recombination fraction ($\mathit  {\theta _{Zmax}}$). For marker 13, results are inconclusive.}}{5}{}\protected@file@percent }
+\newlabel{tab:ci_bounds}{{1}{5}{}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces LOD score comparison between data with modified and default allele frequencies for different $\theta $ values. The left column remains uncolored, while the other two columns are colored to highlight differences. The first row with headers is explicitly white.}}{6}{}\protected@file@percent }
+\newlabel{tab:lod_comparison}{{2}{6}{}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Misspecifying the genetic model}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces LOD score analysis results for autosomal recessive mode of inheritance. Top row shows maximum LOD score for each marker. Conditional coloring: green to red - higest to lowest LOD score.}}{7}{}\protected@file@percent }
+\newlabel{fig:xrec_lod}{{5}{7}{}{figure.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Familial association analysis}{7}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Results of the FBAT analysis for SNPs with at least 10 informative families. Each SNP has two rows of results, one for each allele. The columns are defined as follows: \textbf  {Afreq} represents the allelic frequency, \textbf  {Fam\#} is the number of informative families, \textbf  {S-E(S)} is the score used to test association minus its expected value under the null hypothesis (with the sign indicating whether an allele is more or less frequently transmitted from heterozygous parents to affected children), \textbf  {Var(S)} is the variance of the score, \textbf  {Z} is the test statistic calculated as $(S-E(S))/\sqrt  {Var(S)}$, and \textbf  {P} is the p-value associated with the test ($p \leq 0.05$ indicates rejection of $\mathit  {H_0}$).}}{9}{}\protected@file@percent }
+\newlabel{tab:fbat_results}{{3}{9}{}{table.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Linkage disequilibrium plot for SNP6 - rs76179836 and other SNPs in the GJB6 gene. The plot shows the r2 values for each pair of SNPs. On the x-axis shown are $\mathtt  {r^2}$ values for each SNP. The blue and red dashed lines represent $\mathtt  {r^2}$ of 1 and 0.8, respectively. On the y-axis are the coordinates on the chromosome.}}{9}{}\protected@file@percent }
+\newlabel{fig:ld_plot}{{6}{9}{}{figure.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Multifactorial disease: Rheumatoid Arthritis}{9}{}\protected@file@percent }
 \xdef \mintedoldcachechecksum{\detokenize{4ED2E5932F31784F0A328BE7FE46B7C5:3}}
-\gdef \@abspage@last{7}
+\gdef \@abspage@last{10}
