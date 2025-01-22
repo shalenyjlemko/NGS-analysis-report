@@ -1,0 +1,26 @@
+PLINK v1.90b5 32-bit (14 Nov 2017)
+Options in effect:
+  --assoc
+  --bfile lndMkMAFHWE
+  --ci .095
+  --out res_allelic
+
+Hostname: VDIX-IB119-24
+Working directory: C:\Users\ibgbi119\Downloads\TP_DATA_PROG\TP_DATA_PROG\II.a.Plink
+Start time: Thu Jan 16 14:27:12 2025
+
+Random number seed: 1737034032
+4095 MB RAM detected; reserving 2047 MB for main workspace.
+Allocated 1535 MB successfully, after larger attempt(s) failed.
+49462 variants loaded from .bim file.
+89 people (89 males, 0 females) loaded from .fam.
+89 phenotype values loaded from .fam.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 89 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.996817.
+49462 variants and 89 people pass filters and QC.
+Among remaining phenotypes, 44 are cases and 45 are controls.
+Writing C/C --assoc report to res_allelic.assoc ... done.
+
+End time: Thu Jan 16 14:27:12 2025
